@@ -4,6 +4,11 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+import Buefy from "buefy";
+import "@/scss/main.scss";
+
+Vue.use(Buefy);
+
 Vue.config.productionTip = false;
 
 new Vue({
