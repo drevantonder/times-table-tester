@@ -5,7 +5,7 @@
           {{ number1 }} &times; {{ number2 }} = <input v-model="answer" class="answer-input" type="number" autofocus :min="minAnswer" :max="maxAnswer">
       </h1>
       <h2 class="has-text-success">
-        {{ finished }}
+        {{ finished }} - {{ seconds }}s
       </h2>
     </template>
     <button v-else class="button is-rounded is-large is-success" @click="start">
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 const MAX_MULTIPLE = 12;
 
 export default {
@@ -27,8 +29,18 @@ export default {
       minAnswer: 0,
       maxAnswer: 144,
       started: false,
-      finished: 0
+      finished: 0,
+
+      timeStarted: null,
+      timeTaken: 0,
+      interval: null
     };
+  },
+
+  computed: {
+    seconds() {
+      return moment.duration(this.timeTaken).asSeconds();
+    }
   },
 
   watch: {
@@ -39,11 +51,22 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+
   methods: {
     start() {
       this.started = true;
 
+      this.timeStarted = Date.now();
+
       this.next();
+
+      this.interval = setInterval(
+        () => (this.timeTaken = Date.now() - this.timeStarted),
+        100
+      );
     },
 
     next() {
