@@ -5,7 +5,7 @@
           {{ number1 }} &times; {{ number2 }} = <input v-model="answer" class="answer-input" type="number" autofocus :min="minAnswer" :max="maxAnswer">
       </h1>
       <h2 class="has-text-success">
-        {{ finished }} - {{ seconds }}s
+        {{ finished }} - <span v-if="minutes >= 1">{{ minutes }}m</span> {{ seconds }}s
       </h2>
     </template>
     <button v-else class="button is-rounded is-large is-success" @click="start">
@@ -39,7 +39,15 @@ export default {
 
   computed: {
     seconds() {
-      return moment.duration(this.timeTaken).asSeconds();
+      return moment.duration(this.timeTaken).seconds();
+    },
+
+    minutes() {
+      return moment
+        .duration(this.timeTaken)
+        .asMinutes()
+        .toString()
+        .split(".")[0];
     }
   },
 
