@@ -1,6 +1,16 @@
 <template>
   <div class="container has-text-centered">
-    <template v-if="started">
+    <template v-if="status == Status.BeforeGame">
+      <h1 class="is-size-2">Times Table Tester</h1>
+      <p class="is-size-4">Solve as many as you can in {{ duration }} min</p>
+      <br>
+      <button class="button is-rounded is-large is-success" @click="start">
+        Let's Go
+      </button>
+    </template>   
+
+
+    <template v-else-if="status == Status.InGame">
       <h1 class="question">
           {{ number1 }} &times; {{ number2 }} = <input v-model="answer" class="answer-input" type="number" autofocus :min="minAnswer" :max="maxAnswer">
       </h1>
@@ -8,15 +18,26 @@
         {{ finished }} - <span v-if="minutes >= 1">{{ minutes }}m</span> {{ seconds }}s
       </h2>
     </template>
-    <button v-else class="button is-rounded is-large is-success" @click="start">
-      Start
-    </button>  
+
+    <template v-else-if="status == Status.AfterGame">
+      <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
+
+      <button class="button is-rounded is-large is-success" @click="start">
+        Let's Go Again
+      </button>
+    </template>
     
   </div>
 </template>
 
 <script>
 import moment from "moment";
+
+const Status = {
+  BeforeGame: 1,
+  InGame: 2,
+  AfterGame: 3
+};
 
 const MAX_MULTIPLE = 12;
 
@@ -28,12 +49,16 @@ export default {
       answer: null,
       minAnswer: 0,
       maxAnswer: 144,
-      started: false,
+      status: Status.BeforeGame,
       finished: 0,
 
       timeStarted: null,
       timeTaken: 0,
-      interval: null
+      interval: null,
+
+      Status: Status,
+
+      duration: 0.1 // minutes
     };
   },
 
@@ -65,7 +90,9 @@ export default {
 
   methods: {
     start() {
-      this.started = true;
+      this.finished = 0;
+
+      this.status = Status.InGame;
 
       this.timeStarted = Date.now();
 
@@ -75,6 +102,8 @@ export default {
         () => (this.timeTaken = Date.now() - this.timeStarted),
         100
       );
+
+      setTimeout(() => this.gameOver(), 1000 * 60 * this.duration);
     },
 
     next() {
@@ -86,6 +115,10 @@ export default {
     correctAnswer() {
       this.finished += 1;
       this.next();
+    },
+
+    gameOver() {
+      this.status = Status.AfterGame;
     }
   }
 };
