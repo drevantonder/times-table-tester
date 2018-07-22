@@ -1,7 +1,7 @@
 <template>
 
   <div id="app">
-    <section class="hero is-primary is-bold is-fullheight">
+    <section id="hero" class="hero is-primary is-bold is-fullheight">
       <div class="hero-head">
         <header class="navbar">
           <div class="container">
@@ -27,3 +27,10 @@
     </section>
   </div>
 </template>
+
+<style lang="scss">
+#hero {
+  background-color: #08aeea;
+  background-image: linear-gradient(151deg, #08aeea 0%, #2af598 100%);
+}
+</style>
