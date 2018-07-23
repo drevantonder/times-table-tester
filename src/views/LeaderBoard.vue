@@ -57,7 +57,7 @@ export default {
 
   methods: {
     sortScores(scores) {
-      return Object.values(scores).sort((a, b) => a.score < b.score);
+      return Object.values(scores).sort((a, b) => b.score - a.score);
     }
   },
 
