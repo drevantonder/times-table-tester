@@ -10,28 +10,32 @@
       </div>
 
       <div class="navbar-menu" :class="{'is-active': activeNavbarMenu}">
-        <router-link class="navbar-item" to="/">Game</router-link>
-        <router-link class="navbar-item" to="/leaderboard">LeaderBoard</router-link>
+        <div class="navbar-start">
+          <router-link class="navbar-item" to="/">Game</router-link>
+          <router-link class="navbar-item" to="/leaderboard">LeaderBoard</router-link>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <b-field>
+              <p class="control">
+                <span class="button is-static">Theme</span>
+              </p>
+              <b-select placeholder="Theme" v-model="theme">
+                <option
+                  v-for="theme in themes"
+                  :value="Theme[theme]"
+                  :key="theme">
+                  {{ theme }}
+                </option>
+              </b-select>
+            </b-field>
+          </div>
+        </div>  
       </div>
     </nav>
     <div id="background" :class="{'theme-teal': theme === Theme.Teal, 'theme-pink': theme === Theme.Pink, 'theme-red': theme === Theme.Red }" />
     <router-view />
-
-    <div id="theme-selection">
-      <b-field>
-        <p class="control">
-          <span class="button is-static">Theme</span>
-        </p>
-        <b-select placeholder="Theme" v-model="theme">
-          <option
-            v-for="theme in themes"
-            :value="Theme[theme]"
-            :key="theme">
-            {{ theme }}
-          </option>
-        </b-select>
-      </b-field>
-    </div>
 
     <div id="hide-navbar-menu-area" @click="hideNavbarMenu()" />
   </div>
@@ -106,13 +110,6 @@ export default {
   bottom: 0;
 
   z-index: -1000;
-}
-
-#theme-selection {
-  position: fixed;
-
-  right: 0;
-  bottom: 0;
 }
 
 .theme-teal {
