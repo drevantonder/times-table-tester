@@ -4,19 +4,7 @@
       <template v-if="status == Status.BeforeGame">
         <h1 class="is-size-2">Times Table Tester</h1>
         <p class="is-size-4">Solve as many as you can</p>
-        <div class="lets-go">
-          <b-field grouped group-multiline position="is-centered">
-            <b-input v-model="name" placeholder="Name..." type="text" />
-            <select-league v-model="selectedLeague" :leagues="leagues" />
-            <div class="control">
-              <button class="button is-primary" @click="start">
-                Let's Go!
-              </button>
-            </div>
-          </b-field>
-        </div>
-      </template>   
-
+      </template>
 
       <template v-else-if="status == Status.InGame">
         <h1 class="question">
@@ -29,6 +17,9 @@
 
       <template v-else-if="status == Status.AfterGame">
         <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
+      </template>
+
+      <template v-else-if="status == status.AfterGame || status == status.BeforeGame">
         <div class="lets-go">
           <b-field grouped group-multiline position="is-centered">
             <b-input v-model="name" placeholder="Name../" type="text" />
@@ -40,7 +31,7 @@
             </div>
           </b-field>
         </div>
-      </template>
+      </template>  
     
     </div>
   </div>
