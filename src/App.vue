@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <nav id="navbar" class="level has-background-white">
-      <div class="level-item has-text-centered">
-        <div>
-          <router-link to="/">Game</router-link>
-        </div>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <router-link to="/leaderboard">LeaderBoard</router-link>
-        </div>
-      </div>  
-    </nav>  
+
+      <div class="navbar-menu">
+        <router-link class="navbar-item" to="/">Game</router-link>
+        <router-link class="navbar-item" to="/leaderboard">LeaderBoard</router-link>
+      </div>
+    </nav>
     <div id="background" :class="{'theme-teal': theme === Theme.Teal, 'theme-pink': theme === Theme.Pink, 'theme-red': theme === Theme.Red }" />
     <router-view />
 
@@ -59,7 +61,7 @@ export default {
 
 <style lang="scss">
 #app {
-  height: 100vh;
+  height: calc(100vh - 78px);
   width: 100%;
 
   padding-top: 2rem;
@@ -95,12 +97,5 @@ export default {
 .theme-red {
   background-color: #ffe53b;
   background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
-}
-
-#navbar {
-  position: fixed;
-
-  top: 0;
-  width: 100%;
 }
 </style>
