@@ -1,6 +1,9 @@
 # times-table-tester
 A basic time table tester.
 
+## Description
+A quick times table tester (😉 hence the name) with different leagues. 
+
 ## External Libraries Used
 1. [Vue](https://vuejs.org)
 2. [Moment.js](https://momentjs.com)
