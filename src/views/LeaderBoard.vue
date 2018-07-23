@@ -9,6 +9,7 @@
           <h2 class="subtitle">{{ league.speed }}min</h2>
           <ul>
             <li v-for="score in sortScores(scores[league.id])" :key="score.id">{{ score.name }} - {{ score.score }}</li>
+            <li v-if="!sortScores(scores[league.id]).length">No scores here. Why not be the first. </li>
           </ul>
         </section>
       </b-tab-item>
