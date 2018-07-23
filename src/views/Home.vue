@@ -20,7 +20,7 @@
       </template>
 
       <template v-if="status == Status.AfterGame || status == Status.BeforeGame">
-        <div class="lets-go">
+        <form class="lets-go" @submit.prevent="start">
           <b-field grouped group-multiline position="is-centered">
             <b-input v-model="name" placeholder="Name.." type="text" />
             <select-league v-model="selectedLeague" :leagues="leagues" />
@@ -31,7 +31,7 @@
               </button>
             </div>
           </b-field>
-        </div>
+        </form>
       </template>  
     
     </div>
@@ -246,8 +246,10 @@ $size: 3rem;
 .lets-go {
   margin-top: 1rem;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 1rem;
+
+  .control {
+    max-width: 200px;
+  }
 }
 </style>
