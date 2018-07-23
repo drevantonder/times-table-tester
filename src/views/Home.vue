@@ -19,7 +19,7 @@
         <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
       </template>
 
-      <template v-else-if="status == status.AfterGame || status == status.BeforeGame">
+      <template v-if="status == status.AfterGame || status == status.BeforeGame">
         <div class="lets-go">
           <b-field grouped group-multiline position="is-centered">
             <b-input v-model="name" placeholder="Name../" type="text" />
