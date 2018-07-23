@@ -10,7 +10,7 @@
         <h1 class="question">
             {{ number1 }} &times; {{ number2 }} = <input v-model="answer" class="answer-input" type="number" autofocus :min="minAnswer" :max="maxAnswer">
         </h1>
-        <h2 class="has-text-success">
+        <h2 class="subtitle">
           {{ finished }} - <span v-if="minutes >= 1">{{ minutes }}m</span> {{ seconds }}s
         </h2>
       </template>
