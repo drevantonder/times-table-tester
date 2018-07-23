@@ -18,11 +18,6 @@ $colors: (
     "danger": ($danger, $danger-invert)
 );
 
-// Links
-$link: $primary;
-$link-invert: $primary-invert;
-$link-focus-border: $primary;
-
 // body
 $body-size: 1.5rem;
 $body-color: white;
@@ -30,6 +25,12 @@ $body-color: white;
 @import url('https://fonts.googleapis.com/css?family=Poor+Story');
 
 $body-family: 'Poor Story', cursive;
+
+// title
+$title-color: $body-color;
+
+// text
+$text: $white;
 
 // Import Bulma and Buefy styles
 @import "~bulma";
