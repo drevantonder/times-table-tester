@@ -1,38 +1,40 @@
 <template>
-  <div class="container has-text-centered">
-    <template v-if="status == Status.BeforeGame">
-      <h1 class="is-size-2">Times Table Tester</h1>
-      <p class="is-size-4">Solve as many as you can</p>
-      <div class="lets-go">
-        <select-league v-model="selectedLeague" :leagues="leagues">
-          <button class="button is-primary" @click="start">
-            Let's Go!
-          </button>
-        </select-league>
-      </div>
-    </template>   
+  <div class="center">
+    <div class="container has-text-centered">
+      <template v-if="status == Status.BeforeGame">
+        <h1 class="is-size-2">Times Table Tester</h1>
+        <p class="is-size-4">Solve as many as you can</p>
+        <div class="lets-go">
+          <select-league v-model="selectedLeague" :leagues="leagues">
+            <button class="button is-primary" @click="start">
+              Let's Go!
+            </button>
+          </select-league>
+        </div>
+      </template>   
 
 
-    <template v-else-if="status == Status.InGame">
-      <h1 class="question">
-          {{ number1 }} &times; {{ number2 }} = <input v-model="answer" class="answer-input" type="number" autofocus :min="minAnswer" :max="maxAnswer">
-      </h1>
-      <h2 class="has-text-success">
-        {{ finished }} - <span v-if="minutes >= 1">{{ minutes }}m</span> {{ seconds }}s
-      </h2>
-    </template>
+      <template v-else-if="status == Status.InGame">
+        <h1 class="question">
+            {{ number1 }} &times; {{ number2 }} = <input v-model="answer" class="answer-input" type="number" autofocus :min="minAnswer" :max="maxAnswer">
+        </h1>
+        <h2 class="has-text-success">
+          {{ finished }} - <span v-if="minutes >= 1">{{ minutes }}m</span> {{ seconds }}s
+        </h2>
+      </template>
 
-    <template v-else-if="status == Status.AfterGame">
-      <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
-      <div class="lets-go">
-        <select-league v-model="selectedLeague" :leagues="leagues">
-          <button class="button is-primary" @click="start">
-            Go Again!
-          </button>
-        </select-league>
-      </div>
-    </template>
+      <template v-else-if="status == Status.AfterGame">
+        <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
+        <div class="lets-go">
+          <select-league v-model="selectedLeague" :leagues="leagues">
+            <button class="button is-primary" @click="start">
+              Go Again!
+            </button>
+          </select-league>
+        </div>
+      </template>
     
+    </div>
   </div>
 </template>
 

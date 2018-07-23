@@ -23,6 +23,14 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
 
+// body
+$body-size: 1.5rem;
+$body-color: white;
+
+@import url('https://fonts.googleapis.com/css?family=Poor+Story');
+
+$body-family: 'Poor Story', cursive;
+
 // Import Bulma and Buefy styles
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
