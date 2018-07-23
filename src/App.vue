@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav id="navbar" class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" @click="toggleNavbarMenu()">
           <span aria-hidden="true"></span>
@@ -36,8 +36,6 @@
     </nav>
     <div id="background" :class="{'theme-teal': theme === Theme.Teal, 'theme-pink': theme === Theme.Pink, 'theme-red': theme === Theme.Red }" />
     <router-view />
-
-    <div id="hide-navbar-menu-area" @click="hideNavbarMenu()" />
   </div>
 </template>
 
@@ -62,6 +60,14 @@ export default {
     themes() {
       return Object.keys(Theme);
     }
+  },
+
+  mounted() {
+    window.addEventListener("click", () => this.hideNavbarMenu());
+
+    document
+      .querySelector("#navbar")
+      .addEventListener("click", event => event.stopPropagation());
   },
 
   methods: {
@@ -90,15 +96,6 @@ export default {
   width: 100%;
 
   padding-top: 2rem;
-}
-
-#hide-navbar-menu-area {
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-
-  top: 78px;
-  bottom: 0;
 }
 
 #background {
