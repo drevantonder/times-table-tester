@@ -2,14 +2,14 @@
   <div id="app">
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" @click="toggleNavbarMenu()">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div class="navbar-menu">
+      <div class="navbar-menu" :class="{'is-active': activeNavbarMenu}">
         <router-link class="navbar-item" to="/">Game</router-link>
         <router-link class="navbar-item" to="/leaderboard">LeaderBoard</router-link>
       </div>
@@ -32,6 +32,8 @@
         </b-select>
       </b-field>
     </div>
+
+    <div id="hide-navbar-menu-area" @click="hideNavbarMenu()" />
   </div>
 </template>
 
@@ -46,6 +48,7 @@ export default {
   data() {
     return {
       theme: Theme.Teal,
+      activeNavbarMenu: false,
 
       Theme: Theme
     };
@@ -54,6 +57,24 @@ export default {
   computed: {
     themes() {
       return Object.keys(Theme);
+    }
+  },
+
+  methods: {
+    toggleNavbarMenu() {
+      if (this.activeNavbarMenu) {
+        this.hideNavbarMenu();
+      } else {
+        this.showNavbarMenu();
+      }
+    },
+
+    showNavbarMenu() {
+      this.activeNavbarMenu = true;
+    },
+
+    hideNavbarMenu() {
+      this.activeNavbarMenu = false;
     }
   }
 };
@@ -67,12 +88,22 @@ export default {
   padding-top: 2rem;
 }
 
+#hide-navbar-menu-area {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+
+  top: 78px;
+  bottom: 0;
+}
+
 #background {
   height: 100vh;
   width: 100%;
   position: fixed;
 
-  top: 0;
+  top: 78px;
+  bottom: 0;
 
   z-index: -1000;
 }
