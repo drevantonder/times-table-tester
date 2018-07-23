@@ -130,7 +130,15 @@ export default {
       if (!this.selectedLeague) {
         this.selectedLeague = this.leagues[0];
       }
+    },
+
+    name() {
+      localStorage.setItem("name", this.name);
     }
+  },
+
+  mounted() {
+    this.name = localStorage.getItem("name");
   },
 
   beforeDestroy() {

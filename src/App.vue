@@ -1,5 +1,4 @@
 <template>
-
   <div id="app">
     <nav id="navbar" class="level has-background-white">
       <div class="level-item has-text-centered">
