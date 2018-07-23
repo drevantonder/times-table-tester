@@ -5,11 +5,15 @@
         <h1 class="is-size-2">Times Table Tester</h1>
         <p class="is-size-4">Solve as many as you can</p>
         <div class="lets-go">
-          <select-league v-model="selectedLeague" :leagues="leagues">
-            <button class="button is-primary" @click="start">
-              Let's Go!
-            </button>
-          </select-league>
+          <b-field>
+            <b-input v-model="name" placeholder="Name..." type="text" />
+            <select-league v-model="selectedLeague" :leagues="leagues" />
+            <div class="control">
+              <button class="button is-primary" @click="start">
+                Let's Go!
+              </button>
+            </div>
+          </b-field>
         </div>
       </template>   
 
@@ -26,11 +30,15 @@
       <template v-else-if="status == Status.AfterGame">
         <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
         <div class="lets-go">
-          <select-league v-model="selectedLeague" :leagues="leagues">
-            <button class="button is-primary" @click="start">
-              Go Again!
-            </button>
-          </select-league>
+          <b-field>
+            <b-input v-model="name" placeholder="Name../" type="text" />
+            <select-league v-model="selectedLeague" :leagues="leagues" />
+            <div class="control">
+              <button class="button is-primary" @click="start">
+                Go Again!
+              </button>
+            </div>
+          </b-field>
         </div>
       </template>
     
@@ -78,8 +86,9 @@ export default {
       Status: Status,
 
       selectedLeague: null,
+      leagues: [],
 
-      leagues: []
+      name: ""
     };
   },
 
@@ -159,6 +168,7 @@ export default {
         .doc(this.selectedLeague.id)
         .collection("scores")
         .add({
+          name: this.name || this.name !== "" ? this.name : "Anonymous",
           score: this.finished
         });
     }

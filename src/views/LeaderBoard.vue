@@ -5,7 +5,7 @@
     <b-tabs>
       <b-tab-item v-for="league in leagues" :key="league.id" :label="league.name">
         <ul>
-          <li v-for="score in sortScores(scores[league.id])" :key="score.id">{{ score.score }}</li>
+          <li v-for="score in sortScores(scores[league.id])" :key="score.id">{{ score.name }} - {{ score.score }}</li>
         </ul>
       </b-tab-item>
     </b-tabs>
