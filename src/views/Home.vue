@@ -2,11 +2,14 @@
   <div class="container has-text-centered">
     <template v-if="status == Status.BeforeGame">
       <h1 class="is-size-2">Times Table Tester</h1>
-      <p class="is-size-4">Solve as many as you can in {{ duration }} min</p>
-      <br>
-      <button class="button is-rounded is-large is-success" @click="start">
-        Let's Go
-      </button>
+      <p class="is-size-4">Solve as many as you can</p>
+      <div class="lets-go">
+        <select-league v-model="selectedLeague" :leagues="leagues">
+          <button class="button is-primary" @click="start">
+            Let's Go!
+          </button>
+        </select-league>
+      </div>
     </template>   
 
 
@@ -21,17 +24,27 @@
 
     <template v-else-if="status == Status.AfterGame">
       <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
-
-      <button class="button is-rounded is-large is-success" @click="start">
-        Let's Go Again
-      </button>
+      <div class="lets-go">
+        <select-league v-model="selectedLeague" :leagues="leagues">
+          <button class="button is-primary" @click="start">
+            Go Again!
+          </button>
+        </select-league>
+      </div>
     </template>
     
   </div>
 </template>
 
 <script>
+import SelectLeague from "@/components/SelectLeague.vue";
+
 import moment from "moment";
+
+import firebase from "@/firebase";
+const db = firebase.firestore();
+
+const leagues = db.collection("leagues");
 
 const Status = {
   BeforeGame: 1,
@@ -42,6 +55,10 @@ const Status = {
 const MAX_MULTIPLE = 12;
 
 export default {
+  components: {
+    SelectLeague
+  },
+
   data() {
     return {
       number1: 0,
@@ -58,8 +75,14 @@ export default {
 
       Status: Status,
 
-      duration: 0.1 // minutes
+      selectedLeague: null,
+
+      leagues: []
     };
+  },
+
+  firestore: {
+    leagues: leagues
   },
 
   computed: {
@@ -73,6 +96,10 @@ export default {
         .asMinutes()
         .toString()
         .split(".")[0];
+    },
+
+    duration() {
+      return this.selectedLeague.speed;
     }
   },
 
@@ -80,6 +107,12 @@ export default {
     answer() {
       if (this.answer == this.number1 * this.number2) {
         this.correctAnswer();
+      }
+    },
+
+    leagues() {
+      if (!this.selectedLeague) {
+        this.selectedLeague = this.leagues[0];
       }
     }
   },
@@ -119,6 +152,13 @@ export default {
 
     gameOver() {
       this.status = Status.AfterGame;
+
+      leagues
+        .doc(this.selectedLeague.id)
+        .collection("scores")
+        .add({
+          score: this.finished
+        });
     }
   }
 };
@@ -149,5 +189,13 @@ $size: 3rem;
 
 .answer-input:focus {
   outline: none;
+}
+
+.lets-go {
+  margin-top: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
