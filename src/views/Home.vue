@@ -35,6 +35,14 @@
       </template>  
     
     </div>
+
+    <b-modal :active.sync="getNameModal">
+      <b-field label="Don't lose your score to Mr Anonymous">
+        <b-input v-model="name" placeholder="Name.." type="text" />
+      </b-field>
+      <button v-if="anonymous" class="button is-danger" @click="publish('Mr Anonymous')" >I am feeling generous today</button>
+      <button v-else class="button is-primary" @click="publish(name)">Publish</button>
+    </b-modal>
   </div>
 </template>
 
@@ -80,7 +88,8 @@ export default {
       selectedLeague: null,
       leagues: [],
 
-      name: ""
+      name: "",
+      getNameModal: false
     };
   },
 
@@ -103,6 +112,10 @@ export default {
 
     duration() {
       return this.selectedLeague.speed;
+    },
+
+    anonymous() {
+      return this.name == null || this.name === "";
     }
   },
 
@@ -156,13 +169,31 @@ export default {
     gameOver() {
       this.status = Status.AfterGame;
 
+      if (!this.anonymous) {
+        this.publish(this.name);
+      } else {
+        this.showGetNameModal();
+      }
+    },
+
+    showGetNameModal() {
+      this.getNameModal = true;
+    },
+
+    hideGetNameModal() {
+      this.getNameModal = false;
+    },
+
+    publish(name) {
       leagues
         .doc(this.selectedLeague.id)
         .collection("scores")
         .add({
-          name: this.name || this.name !== "" ? this.name : "Anonymous",
+          name: name,
           score: this.finished
         });
+
+      this.hideGetNameModal();
     }
   }
 };

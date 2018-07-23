@@ -26,11 +26,14 @@ $body-color: white;
 
 $body-family: 'Poor Story', cursive;
 
-// title
+// titles
 $title-color: $body-color;
 
 // text
 $text: $white;
+
+// labels
+$label-color: white;
 
 // Import Bulma and Buefy styles
 @import "~bulma";
