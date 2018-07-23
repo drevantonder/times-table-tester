@@ -1,12 +1,16 @@
 <template>
-  <div class="container has-text-centered has-text-white">
+  <div class="container">
     <h1 class="title">LeaderBoard</h1>
 
     <b-tabs>
       <b-tab-item v-for="league in leagues" :key="league.id" :label="league.name">
-        <ul>
-          <li v-for="score in sortScores(scores[league.id])" :key="score.id">{{ score.name }} - {{ score.score }}</li>
-        </ul>
+        <section class="has-text-centered">
+          <h1 class="title">{{ league.name }}</h1>
+          <h2 class="subtitle">{{ league.speed }}min</h2>
+          <ul>
+            <li v-for="score in sortScores(scores[league.id])" :key="score.id">{{ score.name }} - {{ score.score }}</li>
+          </ul>
+        </section>
       </b-tab-item>
     </b-tabs>
   </div>    
