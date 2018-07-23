@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import Vue from "vue";
-
 import firebase from "@/firebase";
 const db = firebase.firestore();
 
@@ -31,20 +29,24 @@ export default {
   watch: {
     leagues() {
       this.leagues.forEach(league => {
-        Vue.set(this.scores, league.id, {});
+        this.$set(this.scores, league.id, {});
         let scores = this.scores[league.id];
         this.$firestoreRefs.leagues
           .doc(league.id)
           .collection("scores")
           .get()
-          .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-              Vue.set(scores, doc.id, {
-                id: doc.id,
-                ...doc.data()
-              });
-            });
-          });
+          .then(
+            function(querySnapshot) {
+              querySnapshot.forEach(
+                function(doc) {
+                  this.$set(scores, doc.id, {
+                    id: doc.id,
+                    ...doc.data()
+                  });
+                }.bind(this)
+              );
+            }.bind(this)
+          );
       });
     }
   },
