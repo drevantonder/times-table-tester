@@ -7,6 +7,11 @@
 </template>
 
 <style lang="scss">
+#app {
+  height: 100vh;
+  width: 100%;
+}
+
 #background {
   height: 100vh;
   width: 100%;
