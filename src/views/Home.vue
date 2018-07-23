@@ -133,12 +133,17 @@ export default {
     },
 
     name() {
-      localStorage.setItem("name", this.name);
+      if (!this.anonymous) {
+        localStorage.setItem("name", this.name);
+      } else {
+        localStorage.removeItem("name");
+      }
     }
   },
 
   mounted() {
-    this.name = localStorage.getItem("name");
+    let name = localStorage.getItem("name");
+    this.name = name ? name : "";
   },
 
   beforeDestroy() {
