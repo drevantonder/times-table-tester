@@ -19,14 +19,15 @@
         <h1 class="is-size-2">You finished {{ finished }} in {{ duration }} min.</h1>
       </template>
 
-      <template v-if="status == status.AfterGame || status == status.BeforeGame">
+      <template v-if="status == Status.AfterGame || status == Status.BeforeGame">
         <div class="lets-go">
           <b-field grouped group-multiline position="is-centered">
-            <b-input v-model="name" placeholder="Name../" type="text" />
+            <b-input v-model="name" placeholder="Name.." type="text" />
             <select-league v-model="selectedLeague" :leagues="leagues" />
             <div class="control">
               <button class="button is-primary" @click="start">
-                Go Again!
+                <template v-if="status == Status.BeforeGame">Lets Go!</template>
+                <template v-else>Go Again!</template>
               </button>
             </div>
           </b-field>
