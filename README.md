@@ -1,6 +1,8 @@
 # times-table-tester
 A basic time table tester.
 
+Deployed at https://times-table-tester.herokuapp.com/#/
+
 ## Description
 A quick times table tester (😉 hence the name) with different leagues. 
 
