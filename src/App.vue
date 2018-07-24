@@ -31,6 +31,7 @@
               </b-select>
             </b-field>
           </div>
+          <a class="navbar-item" href="https://github.com/DrevanTonder/times-table-tester"><font-awesome-icon :icon="['fab', 'github']" /></a>
         </div>  
       </div>
     </nav>
