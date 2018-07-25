@@ -99,12 +99,12 @@ export default {
 
   computed: {
     seconds() {
-      return moment.duration(this.timeTaken).seconds();
+      return moment.duration(this.timeLeft).seconds();
     },
 
     minutes() {
       return moment
-        .duration(this.timeTaken)
+        .duration(this.timeLeft)
         .asMinutes()
         .toString()
         .split(".")[0];
@@ -116,6 +116,10 @@ export default {
 
     anonymous() {
       return this.name == null || this.name === "";
+    },
+
+    timeLeft() {
+      return this.duration * 60 * 1000 - this.timeTaken;
     }
   },
 
