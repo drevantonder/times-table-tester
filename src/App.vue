@@ -31,7 +31,7 @@
               </b-select>
             </b-field>
           </div>
-          <a class="navbar-item" href="https://github.com/DrevanTonder/times-table-tester"><font-awesome-icon :icon="['fab', 'github']" /></a>
+          <a class="navbar-item" aria-label="Github Repository" href="https://github.com/DrevanTonder/times-table-tester"><font-awesome-icon :icon="['fab', 'github']" /></a>
         </div>  
       </div>
     </nav>
@@ -111,7 +111,7 @@ export default {
 }
 
 .theme-teal {
-  background-color: #08aeea;
+  background-color: #2af598;
   background-image: linear-gradient(151deg, #08aeea 0%, #2af598 100%);
 }
 
