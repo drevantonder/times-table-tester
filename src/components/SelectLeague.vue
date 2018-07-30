@@ -1,5 +1,5 @@
 <template>
-  <b-select placeholder="Select a League" v-model="newValue" @change="$emit('input', newValue)">
+  <b-select placeholder="Select a League" v-model="newValue" @change="$emit('input', newValue)" v-bind="$attrs">
     <option
       v-for="(league, key) in leagues"
       :value="league"
@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  inheritAttrs: false,
   props: {
     leagues: {
       required: true,
