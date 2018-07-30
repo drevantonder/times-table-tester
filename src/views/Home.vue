@@ -22,7 +22,9 @@
       <template v-if="status == Status.AfterGame || status == Status.BeforeGame">
         <form class="lets-go" @submit.prevent="start">
           <b-field grouped group-multiline position="is-centered">
+            <label class="is-sr-only">Name</label>
             <b-input v-model="name" placeholder="Name.." type="text" />
+            <label class="is-sr-only">League</label>
             <select-league v-model="selectedLeague" :leagues="leagues" />
             <div class="control">
               <button class="button is-primary" @click="start">
