@@ -21,7 +21,8 @@
               <p class="control">
                 <span class="button is-static">Theme</span>
               </p>
-              <b-select placeholder="Theme" v-model="theme">
+              <label class="is-sr-only" for="theme">Name</label>
+              <b-select id="theme" placeholder="Theme" v-model="theme">
                 <option
                   v-for="theme in themes"
                   :value="Theme[theme]"

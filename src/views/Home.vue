@@ -3,7 +3,7 @@
     <div class="container has-text-centered">
       <template v-if="status == Status.BeforeGame">
         <h1 class="is-size-2">Times Table Tester</h1>
-        <p class="is-size-4">Solve as many as you can</p>
+        <h2 class="is-size-4">Solve as many as you can</h2>
       </template>
 
       <template v-else-if="status == Status.InGame">
