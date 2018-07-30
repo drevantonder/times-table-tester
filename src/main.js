@@ -4,7 +4,7 @@ import router from "./router";
 import "./registerServiceWorker";
 
 import VueFire from "vuefire";
-import "firebase";
+import "./firebase";
 
 Vue.use(VueFire);
 
